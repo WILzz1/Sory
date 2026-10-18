@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untuk Kamu</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f0f11;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-main: #f1f1f3;
+            --text-muted: #94949b;
+            --accent: #d4af37;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(212, 175, 55, 0.05);
+            filter: blur(100px);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+            color: var(--text-main);
+        }
+
+        p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .btn {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 12px 28px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .page {
+            display: none;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- WIDGET MUSIK ELEGAN --- */
+        .music-player {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            padding: 10px 16px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            user-select: none;
+        }
+
+        .music-player:hover {
+            border-color: var(--accent);
+        }
+
+        .music-icon {
+            width: 14px;
+            height: 14px;
+            fill: var(--accent);
+        }
+
+        .music-info {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .music-title {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        .music-status {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+        }
+
+        .equalizer {
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+            height: 12px;
+        }
+
+        .bar {
+            width: 2px;
+            background: var(--accent);
+            border-radius: 1px;
+            height: 4px;
+            transition: height 0.3s ease;
+        }
+
+        /* Animasi saat musik diputar */
+        .playing .bar:nth-child(1) { animation: bounce 1.2s infinite ease-in-out; }
+        .playing .bar:nth-child(2) { animation: bounce 0.8s infinite ease-in-out 0.2s; }
+        .playing .bar:nth-child(3) { animation: bounce 1s infinite ease-in-out 0.4s; }
+
+        @keyframes bounce {
+            0%, 100% { height: 3px; }
+            50% { height: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow"></div>
+
+    <div class="container">
+        <!-- Halaman 1: Kata-kata Semangat -->
+        <div id="page1" class="page active">
+            <div class="card">
+                <h2>Untuk Kamu My honey Dea,</h2>
+                <p>
+                    Aku tahu hari-hari belakangan ini tidak selalu mudah buat kamu. Istirahatlah kalau lelah, jangan dipaksakan terus. Aku selalu ada di sini untuk mendukungmu, kapan pun kamu butuh.Semangat terus ya sayangku
+                </p>
+                <button class="btn" onclick="switchPage('page2')">Lanjut</button>
+            </div>
+        </div>
+
+        <!-- Halaman 2: Kata-kata Maaf -->
+        <div id="page2" class="page">
+            <div class="card">
+                <h2>Satu Lagi,</h2>
+                <p>
+                    Kalau belakangan ini ada sikap atau ucapanku yang kurang berkenan, atau mungkin bikin kamu merasa kurang nyaman, aku minta maaf ya. Aku selalu belajar untuk jadi pasangan yang lebih baik buat kamu. Terima kasih sudah sabar.
+                    Jangan marah lagi yang yang aku minta maaf.
+                </p>
+                <button class="btn" onclick="switchPage('page1')">Kembali</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Element -->
+    <!-- Catatan: Ganti src di bawah jika ingin menggunakan lagu pilihanmu sendiri -->
+    <audio id="bgMusic" loop>
+        <source src="George Benson - Nothing's Gonna Change My Love For You [Lyrics].mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Tombol Pengontrol Musik -->
+    <div class="music-player" id="musicBtn" onclick="toggleMusic()">
+        <div class="equalizer" id="equalizer">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <div class="music-info">
+            <span class="music-title">Backsound Melodi</span>
+            <span class="music-status" id="musicStatus">Klik untuk memutar</span>
+        </div>
+    </div>
+
+    <script>
+        const music = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicBtn');
+        const musicStatus = document.getElementById('musicStatus');
+        const equalizer = document.getElementById('equalizer');
+
+        music.volume = 0.4; // Volume sedang
+
+        // Fungsi Memutar / Menghentikan Lagu
+        function toggleMusic() {
+            if (music.paused) {
+                music.play();
+                musicStatus.innerText = "Diputar";
+                equalizer.classList.add('playing');
+            } else {
+                music.pause();
+                musicStatus.innerText = "Jeda";
+                equalizer.classList.remove('playing');
+            }
+        }
+
+        // Fungsi Perpindahan Halaman
+        function switchPage(targetPageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+
+            setTimeout(() => {
+                document.getElementById(targetPageId).classList.add('active');
+            }, 150);
+        }
+
+        // Jalankan audio otomatis saat ada interaksi pertama di mana saja
+        document.addEventListener('click', function startAudioOnInteraction() {
+            if (music.paused) {
+                music.play().then(() => {
+                    musicStatus.innerText = "Diputar";
+                    equalizer.classList.add('playing');
+                }).catch(() => {});
+            }
+            document.removeEventListener('click', startAudioOnInteraction);
+        }, { once: true });
+    </script>
+</body>
+</html>
